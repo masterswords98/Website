@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Neel Homchowdhury</title>
+    <link>/</link>
+    <description>Recent content on Neel Homchowdhury</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Wed, 13 May 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Parsing and Cleaning String Data</title>
+      <link>/blog/parsing-and-cleaning-string-data/</link>
+      <pubDate>Fri, 15 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/parsing-and-cleaning-string-data/</guid>
+      <description>library(reticulate) Sys.setenv(RETICULATE_PYTHON=&amp;quot;/usr/bin/python&amp;quot;) use_python(&amp;quot;usr/bin/python&amp;quot;) One of the very difficult parts of data analytics is usually not the actual statistical analysis of large datasets, but rather attempting to properly wrangle the data into formats that are more easily transformable. Here are a few tips to get you started:
+I personally feel that the most important tools you will ever use are in the basic packages of Python itself. Though packages such as regex, numpy, and pandas are all important to making sure that your data is ported into a form that you can actually use for massive calculations, an important part to consider first is how to get there.</description>
+    </item>
+    
+    <item>
+      <title>Project 1</title>
+      <link>/project1/</link>
+      <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/project1/</guid>
+      <description>#Data Sets: results &amp;lt;- read.csv(&amp;quot;~/results.csv&amp;quot;) stats &amp;lt;- read.csv(&amp;quot;~/stats.csv&amp;quot;) o_rs &amp;lt;- results o_sts &amp;lt;- stats Introduction: - I picked 2 datasets relating to the behavior of soccer teams in the English Premier League. I got these datasets from Kaggle.com.
+ The “results” dataset contained information about each individual match per season within the Premier League,from 2006-2018. For each match, it contains the home and away team names, the number of goals scored by either team, and what the end result for the match(i.</description>
+    </item>
+    
+    <item>
+      <title>Project 2: Modeling, Testing, and Predicting</title>
+      <link>/project2/</link>
+      <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/project2/</guid>
+      <description>Modeling library(tidyverse) library(ggplot2) library(lmtest) library(glmnet) bball &amp;lt;- read.csv(&amp;quot;~/cbb16.csv&amp;quot;) glimpse(bball) ## Observations: 351 ## Variables: 23 ## $ TEAM &amp;lt;fct&amp;gt; Abilene Christian, Air Force, Akron, Alabama, Alabama A&amp;amp;M, Alabama St., Albany… ## $ CONF &amp;lt;fct&amp;gt; Slnd, MWC, MAC, SEC, SWAC, SWAC, AE, SWAC, Pat, SB, P12, P12, SEC, SB, SWAC, S… ## $ G &amp;lt;int&amp;gt; 27, 30, 34, 33, 28, 29, 32, 28, 31, 31, 34, 32, 32, 33, 33, 29, 32, 31, 34, 34… ## $ W &amp;lt;int&amp;gt; 9, 12, 25, 18, 10, 12, 23, 13, 12, 9, 25, 15, 16, 28, 8, 9, 18, 11, 16, 20, 21… ## $ ADJOE &amp;lt;dbl&amp;gt; 96.</description>
+    </item>
+    
+    <item>
+      <title>Projects</title>
+      <link>/projects/</link>
+      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
+      
+      <guid>/projects/</guid>
+      <description>Projects Here are some projects I have recently completed: Project 1 -Exploratory Data Analysis with Tidyverse Tools
+Project 2 -Modeling, Testing, and Classification
+Thesis -[The Impact of Social Media Interactions on Musician&amp;rsquo;s Success]</description>
+    </item>
+    
+  </channel>
+</rss>

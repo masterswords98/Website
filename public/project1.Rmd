@@ -1,0 +1,174 @@
+---
+title: "Project 1"
+author: "Neel Homchowdhury"
+output:
+  html_document
+date: '2020-05-13'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#Data Sets:
+
+results <- read.csv("~/results.csv")
+stats <- read.csv("~/stats.csv")
+  
+  
+o_rs <- results
+o_sts <- stats
+
+```
+
+*Introduction:*
+- I picked 2 datasets relating to the behavior of soccer teams in the English Premier League. I got these datasets from Kaggle.com.
+
+- The "results" dataset contained information about each individual match per season within the Premier League,from 2006-2018. For each match, it contains the home and away team names, the number of goals scored by either team, and what the end result for the match(i.e. Home indicated that the home team won, Away meant that the away team won, and Draw indicated that there was a tie). 
+
+```{r echo=TRUE}
+
+library(tidyverse)
+
+o_rs <- results
+glimpse(o_rs)
+
+```
+
+
+
+- The next dataset, "stats" , showed the overall statistics for each individual Premier League team over the same period of 2006-2018. This dataset showed the total number of wins and losses for each team, the total number of cards given over the season, how many and what kind of shots were taken, where goals came from, how many of a specific type of pass was completed or not completed, goalie statistics(i.e. the number of goals saved, blocked, how said goals were saved, whether penalties were let in or not, etc.), how defenders operated and their efficiency in preventing goals (i.e. total tackles, interceptions, outfielder_blocks), and lastly the efficiency of the attacking players in their ability to score/not score(i.e. number of disposessions, number of big chances missed, etc.) 
+
+- This dataset was extremely dense compared to the "results" dataset, but the information in it is invaluable as it is possible to determine so much about the efficiency of certain teams and their specific play styles as a result. 
+
+- I utilized pivot_wider so as to set up an instance where the datapoints for each team could be seen at glance, with the number of wins each team achieved per season a row in said column. I then pivoted back to the original dataset, as it was already well organized and tidyed.
+```{r}
+
+o_sts <- stats
+glimpse(o_sts)
+flipped_dataset <- o_sts %>% pivot_wider(names_from = "team", values_from = "wins")
+glimpse(flipped_dataset)
+
+```
+
+- I'm expecting to see from this dataset a great deal of information on passing styles and their actual potency, as well as the effectiveness of defensive tactics that are employed by various teams. I chose to look at the data behind Premier League soccer largely because I'm a huge soccer fan, but also because of the fact that very few teams have similar tactics within the whole league, and I thought it would be really intriguing to look at whether tactics existed that on paper yielded more positive results than what was shown on the pitch and throughout the league. For the sake of simplicity , I chose to only look at these trend's throughout the course of the 2015-2016,2016-2017,and 2017-2018 seasons. 
+
+
+
+- The datasets were already very tidy to begin with, so there was no need to arrange them to start. I began by first filtering the information in these datasets to only include information concerning the 2017-2018 season. I started with the "results" datset, first by filtering only the games from 2015-2018 season. 
+```{R}
+#Tidying: 
+
+
+filtered_h_a <- o_rs %>% slice(3421:4560)
+full_filtered <- o_sts %>% slice(181:240) 
+glimpse(filtered_h_a)
+glimpse(full_filtered)
+```
+
+- I removed the "season" column from both datasets for this initial visualization as they were extraneous after this filtering. 
+
+- In order to gleam something intriguing about these datasets, and to allow for the joining of these two to be more efficient, I set about creating a new variable from the "results" dataset looking at the number of games won both home and away. Now because of the way that this dataset is set up, it doesn't have full summaries of the total number of games won either home or away. This is a relatively important trend to look at, as home team advantage has always seemed to be this very strong factor in whether or not a team will win or not, but recently this thought process has been slowly questioned as more and more evidence demonstrates that home-team advantage is not the instant "king-maker" that every one assumes it to be. 
+
+- I filtered this data by finding every time the home_team won, and summarizing all of the instances of that occurrence for the home_team. What this ended up giving me was a summation of the number of times this value occurred for the team in the way of numeric value/summation of the variable away_team, with which I created a new variable "wins_home". I did the same for the times these teams were away ("wins_away"), by simply flipping my logic and summing the total number of instances of the variable home_team for each individual team.
+
+```{R}
+first_filter <- o_rs %>% filter(season == "2015-2016" | season == "2016-2017" | season == "2017-2018") %>%  group_by(home_team,away_team, result, home_goals,away_goals, season) %>% summarize_all(n_distinct) 
+
+home_wins <- first_filter %>%  filter(grepl("H", result)) %>% group_by(home_team,season) %>% summarize_all(n_distinct) %>% mutate(wins_home = away_team) %>% select(wins_home, home_team, season)
+
+away_wins <- first_filter %>% filter(grepl("A", result)) %>% group_by(away_team, season) %>% summarize_all(n_distinct) %>% mutate(wins_away = home_team) %>% select(wins_away, away_team, season)
+
+```
+
+- After this point, I began joining the datasets together, starting with the teams and the home/away games won. After that I joined the home/away games won by each individual team to the overall statistic database for each full season. I used full_join for both of these joins because of the utility it provided me in just simply adding all the necessary data to the "stats" dataset. This also allowed me to observe my data in a more easily accessible format, as I was able to just look across the dataset to find the home_games won compared to the total number of games won.
+
+```{R}
+#Joining
+joined_away_home <- full_join(home_wins, away_wins, by=c("home_team" = "away_team", "season" = "season")) %>% rename(club = home_team)
+
+joined_datasets <- full_join(full_filtered, joined_away_home, by=c("season"="season", "team" = "club"))
+
+```
+
+- Next, I filtered the data so that I could take a look at the comparison over time between the total number of wins that each team achieved and the number of away and home wins per season. In doing so, I was able to see that on average, teams that a high amount of wins during the course of the season were more likely to win at home than when they were away. This contradicts my earlier conclusion, and even backs up traditional mindsets about this matter. 
+
+```{r}
+#Wrangling
+joined_datasets %>% select(team, wins, wins_home, wins_away, season) %>% group_by(team,season, wins) %>% summarize( max = max(wins_home)) %>% arrange(desc(max))
+
+joined_datasets %>% select(team, wins, wins_home, wins_away, season) %>% group_by(team,season, wins) %>% summarize( away = max(wins_away)) %>% arrange(desc(away))
+
+
+
+
+```
+
+- Next, I set up a correlation matrix to see which areas were relevant in determining whether or not a team would score more goals, and eventually win the game. Upon further investigation, it seemed that the factors that were relevant were mostly tied to main schools of thought in football: possesion vs counter-attacking. Possesion style football is largely centered on keeping the ball with short accurate passes. Counter-attacking is focused on sitting tight, waiting for the opposing team to lose the ball in your half, and then to pounce quickly with long passes and few touches before eventually scoring. I decided to focus on comparing the average number of total_passes each team made per season, the average number of disposessions(i.e. the amount of times the ball was lost), the average number of goals per season per team, the average number of touches each team had per season(i.e. the amount of times that players from their team dribbled the ball in any general direction), and lastly the average number of through passes (slightly longer passes) that each team had per season. I compared all of these data points to the average number of wins each team had over the course of these 3 seasons. It was interesting to see that over this period, teams that prioritized holding onto the ball and passing more, usually had a very high number of goals scored per season and a subsequently high amount of wins per season. It was also interesting to see that a high number of through passes did not neccesarily coincide with a high number of wins and goals, which is curious most passes that lead to goals are usually through passes. Lastly, it was interesting to note that of the teams that were overall succesful in the Premier League(i.e. ensuring a place in the top 6 of the league), almost all of these teams had a higher number of dispossesions than did teams that ended up placing much lower on the table. This is a fact that is made even more curious by the fact that each of these 6 teams also had a high number of total passes and touches per season, compared to those that placed lower on the table.
+
+```{r}
+#Wrangling
+
+correlation_matrix <- joined_datasets %>% select_if(is.numeric) %>% cor() %>% round(2)
+
+
+joined_datasets %>% select(team, wins, season, total_pass, goals) %>% group_by(team) %>% summarize(avg_passes = mean(total_pass)) %>% arrange(desc(avg_passes))
+
+joined_datasets %>% select(team, wins, season, dispossessed, goals) %>% group_by(team) %>% summarize(avg_disposessions =  mean(dispossessed)) %>% arrange(desc(avg_disposessions))
+
+joined_datasets %>% select(team, wins, season, goals) %>% group_by(team) %>% summarize (avg_goals = mean(goals)) %>% arrange(desc(avg_goals))
+
+joined_datasets %>% select(team, wins, season, touches, goals) %>% group_by(team) %>% summarize(avg_touches = mean(touches)) %>% arrange(desc(avg_touches))
+
+joined_datasets %>% select(team, wins, total_through_ball, goals) %>% group_by(team) %>% summarize_all(mean) %>% arrange(desc(total_through_ball))
+
+```
+
+- The impact of these two plots I've created below demonstrate a topic I brought up earlier, which was the impact of possesion style football versus counter-attacking style football, which in this case can largely be differentiated by the total number of "possesions" the team has, or in more quantifiable terms, the total number of passes. Because possesion style football is much more focused on keeping the ball, utilizing long crosses is frowned upon, and more through passes are utilized. It was very interesting to see how these two styles differed by comparing their total efficacy(i.e. whether or not using these passes would yield a goal), and it was very interesting to see that an increase in the number of through balls largely coincided with an increase in goals scored, and that decreasing the number of long crosses largely increased the number of goals scored.
+
+```{r}
+#Visualizing
+library(ggplot2)
+library(reshape2)
+#Correlation Heatmap
+melted_correlation <- melt(correlation_matrix)
+
+ggplot(data = melted_correlation, aes(x=Var1, y=Var2, fill=value)) +  geom_tile() 
+
+through_to_goal <- joined_datasets %>% select(team, wins, total_through_ball, goals) %>% group_by(team) %>% summarize_all(mean) %>% arrange(desc(total_through_ball))
+
+ggplot(data = through_to_goal) + geom_point(aes(x= goals, y = total_through_ball, color = team)) + ggtitle("Total Through Balls Impact on # of Goals")
+
+ggplot(data = joined_datasets) + geom_point( stat = "summary", fun.y = "mean",  aes(x= goals, y = total_long_balls, color = season))+ ggtitle("Total Long Balls Impact on # of Goals") + scale_x_continuous(breaks = seq(0,110,10))
+
+
+
+```
+
+
+
+- Lastly, I wanted to compare the impacts of defensive tactics/efficiency on the overall capacity to win the game. As much time as I've spent discussing the offensive capabilities of teams to win the games, I did not mention the defensive efforts, largely because I'm still unsure whether or not defensive efforts are more important than offensive efforts. To investigate this, I set up a PCA to determine whether a meaningful relationship even exists between the number of wins a team had per season, and the effort of the defensive players. I did this by looking at the ability for teams to prevent goals from being scored (goals_conceded, outfielder_block), the ability for teams to prevent dangerous balls/runs by opposing teams from reaching anywhere near the goal box (interception, total_clearance), and their ability to physically stop the other team(total_tackle, last_man_tackle). 
+
+```{r}
+#Dimentionality Reduction
+
+defense <- joined_datasets %>% select(wins, goals_conceded, outfielder_block, interception, total_clearance, total_tackle, last_man_tackle ) %>% scale()
+
+teams_pca <- princomp(defense)
+summary(teams_pca, loadings = T)
+
+
+ggplot() + geom_point(aes(teams_pca$scores[, 1], teams_pca$scores[,2])) + xlab("PC1") + ylab("PC2") + ggtitle("PCA Analysis of Defensive Tactics")
+
+
+
+
+```
+
+To interpret this PCA, I had to first begin by determining the number of components to look at. Becuase componet 4 is the first to have a cumulative proportion of variance greater than 80%, I decided to kepe the principal components between 1-4. I then attempted to comprehend the meaning behind each component by looking at the loadings for eachi principal component. PC1 demonstrates that a high number of wins is associated with a low number of goals condeded, outfielder blocks, interceptions, and total clearances, meaning that in this situation the defenders were less likely to be forced into a posiiton where they had to defend more rigourously in order to bring about a positive result. PC2 demonstrates that a low number of conceded goals was associated with a high number of interceptions and total tackles, meaning that teams that were much more aggresive in attemptin to get back the ball from the opposing team were less likely to concede a goal. PC3 demonstrated that a higher win rate was associated with higher blocks from the defenders and more aggressive methods to regain the ball from the opposing team, while at the same time not being forced into a situation where the ball needed to be cleared at the last second, demonstrated by a low last_man_tackle value. Lastly, PC4 showed that a high number of wins was likely associated with a high number of clearances, meaning that teams that were more likely to win were much more likley to drastically get rid of the ball when it was relatively close to their own goal, than attempting to purely regain the ball from the opposing team. All of these results point to the fact that having an aggresive defense focused on regaining the ball is not nearly as important as losing the ball in the first place, and at the same time, reaffirming the potency of a style of football focused on never letting the ball fall into the grasp of the opposing team. 
+
+
+
+
+

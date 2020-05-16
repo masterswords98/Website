@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on Neel Homchowdhury</title>
+    <link>/blog/</link>
+    <description>Recent content in Blogs on Neel Homchowdhury</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Fri, 15 May 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Parsing and Cleaning String Data</title>
+      <link>/blog/parsing-and-cleaning-string-data/</link>
+      <pubDate>Fri, 15 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/parsing-and-cleaning-string-data/</guid>
+      <description>library(reticulate) Sys.setenv(RETICULATE_PYTHON=&amp;quot;/usr/bin/python&amp;quot;) use_python(&amp;quot;usr/bin/python&amp;quot;) One of the very difficult parts of data analytics is usually not the actual statistical analysis of large datasets, but rather attempting to properly wrangle the data into formats that are more easily transformable. Here are a few tips to get you started:
+I personally feel that the most important tools you will ever use are in the basic packages of Python itself. Though packages such as regex, numpy, and pandas are all important to making sure that your data is ported into a form that you can actually use for massive calculations, an important part to consider first is how to get there.</description>
+    </item>
+    
+  </channel>
+</rss>

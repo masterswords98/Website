@@ -1,0 +1,8 @@
+"0","sections = sentence.strip()
+print(sections)
+"
+"2","Traceback (most recent call last):
+  File ""/tmp/Rtmp49Pqut/chunk-code-1ef572c9b38d.txt"", line 1, in <module>
+    sections = sentence.strip()
+NameError: name 'sentence' is not defined
+"

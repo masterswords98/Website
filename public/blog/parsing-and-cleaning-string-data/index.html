@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Neel Homchowdhury" />
+    <meta name="description" content="Describe your website">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <title>Parsing and Cleaning String Data</title>
+    <meta name="generator" content="Hugo 0.70.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../../"><i class="fa fa-home"></i></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="../../blog/">BLOG</a></li>
+        
+        <li><a href="../../projects/">PROJECTS</a></li>
+        
+        <li><a href="resume_Neel.pdf">RESUME</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="../../blog/parsing-and-cleaning-string-data/">Parsing and Cleaning String Data</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          May 15, 2020
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+
+
+<div class="figure">
+<img src="../../blog/2020-05-16-using-regex-to-parse-medical-data_files/med_jargon.jpg" />
+
+</div>
+<pre class="r"><code>library(reticulate)
+Sys.setenv(RETICULATE_PYTHON=&quot;/usr/bin/python&quot;)
+use_python(&quot;usr/bin/python&quot;)</code></pre>
+<p>One of the very difficult parts of data analytics is usually not the actual statistical analysis of large datasets, but rather attempting to properly wrangle the data into formats that are more easily transformable. Here are a few tips to get you started:</p>
+<p>I personally feel that the most important tools you will ever use are in the basic packages of Python itself. Though packages such as regex, numpy, and pandas are all important to making sure that your data is ported into a form that you can actually use for massive calculations, an important part to consider first is how to get there. Take for example this sentence:</p>
+<pre class="python"><code>sentence = &quot;Hello my name is my mother&#39;s name, which is also my father&#39;s name, which was almost my brother&#39;s name, and now is my name&quot;</code></pre>
+<p>I repeated the word “my” many times to illustrate part of my point; Often times important datapoints will be included with other datapoints, making it difficult to easily discern the important parts. However there are options which can help.</p>
+<p>First off, I want to talk about str.split() and str.strip(). These functions are so universal in their capabilities. For example in this case, you can use str.split() like so to chop up the sentence and get the data you need, and str.strip to get rid of all extraneous spacing:</p>
+<pre class="python"><code>sentence = &quot;Hello my name is my mother&#39;s name, which is also my father&#39;s name, which was almost my brother&#39;s name, and now is my name&quot;
+sections = sentence.strip()
+sections = sections.split()
+print(sections)</code></pre>
+<pre><code>## [&#39;Hello&#39;, &#39;my&#39;, &#39;name&#39;, &#39;is&#39;, &#39;my&#39;, &quot;mother&#39;s&quot;, &#39;name,&#39;, &#39;which&#39;, &#39;is&#39;, &#39;also&#39;, &#39;my&#39;, &quot;father&#39;s&quot;, &#39;name,&#39;, &#39;which&#39;, &#39;was&#39;, &#39;almost&#39;, &#39;my&#39;, &quot;brother&#39;s&quot;, &#39;name,&#39;, &#39;and&#39;, &#39;now&#39;, &#39;is&#39;, &#39;my&#39;, &#39;name&#39;]</code></pre>
+<p>And as you can see you can then easily find the number of times “my”&quot; shows up in the sentence</p>
+<pre class="python"><code>sentence = &quot;Hello my name is my mother&#39;s name, which is also my father&#39;s name, which was almost my brother&#39;s name, and now is my name&quot;
+sections = sentence.strip()
+sections = sections.split()
+print(sections)</code></pre>
+<pre><code>## [&#39;Hello&#39;, &#39;my&#39;, &#39;name&#39;, &#39;is&#39;, &#39;my&#39;, &quot;mother&#39;s&quot;, &#39;name,&#39;, &#39;which&#39;, &#39;is&#39;, &#39;also&#39;, &#39;my&#39;, &quot;father&#39;s&quot;, &#39;name,&#39;, &#39;which&#39;, &#39;was&#39;, &#39;almost&#39;, &#39;my&#39;, &quot;brother&#39;s&quot;, &#39;name,&#39;, &#39;and&#39;, &#39;now&#39;, &#39;is&#39;, &#39;my&#39;, &#39;name&#39;]</code></pre>
+<pre class="python"><code>line = &#39;my&#39;
+i = 0
+for sect in sections:
+  if sect == line:
+    i+=1
+
+print(i)</code></pre>
+<pre><code>## 5</code></pre>
+<p>And by using a for loop and the “in” factor, you can easily find out the number of times this word shows up. This can have many applications, and can even be reformatted for going line-by-line within a large text file to glean certain otherwise missed facts about the dataset you’re attempting to gain information about.</p>
+
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+        </div>
+      </div>
+      
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../../js/docs.min.js"></script>
+<script src="../../js/main.js"></script>
+
+<script src="../../js/ie10-viewport-bug-workaround.js"></script>
+
+
+    
+  </body>
+</html>

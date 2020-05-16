@@ -1,0 +1,343 @@
+---
+title: 'Project 2: Modeling, Testing, and Predicting'
+author: "Neel Homchowdhury"
+output:
+  html_document
+date: '2020-05-13'
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+  # this hook is used only when the linewidth option is not NULL
+  if (!is.null(n <- options$linewidth)) {
+    x = knitr:::split_lines(x)
+    # any lines wider than n should be wrapped
+    if (any(nchar(x) > n)) x = strwrap(x, width = n)
+    x = paste(x, collapse = '\n')
+  }
+  hook_output(x, options)
+})
+
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE,fig.align="center",warning=FALSE,message=FALSE,fig.width=8, fig.height=5, linewidth=60)
+options(tibble.width = 100,width = 100)
+library(tidyverse)
+```
+
+# Modeling
+```{R}
+library(tidyverse)
+library(ggplot2)
+library(lmtest)
+library(glmnet)
+
+bball <- read.csv("~/cbb16.csv")
+glimpse(bball)
+
+```
+
+This dataset is describing the all of the statistics of all teams playing Division 1 college basketball during the 2015-2016 season. The variables of importance to this project from said dataset are the following:
+
+ - team: The name of the Division 1 college basketball school
+ - conf: The Athletic Conference in which the school participates in
+ - g: The number of games played
+ - w: The number of games won
+ - adjoe: Adjusted Offensive Efficiency (An estimate of the offensive efficiency (points scored per 100 possessions) a team would have against the average Division I defense)
+- adjde: Adjusted Defensive Efficiency (An estimate of the defensive efficiency (points allowed per 100 possessions) a team would have against the average Division I offense)
+- efg_o: Effective Field Goal Percentage Shot
+- efg_d: Effective Field Goal Percentage Allowed
+- orb: Offensive Rebound Percentage
+- postseason: Round where the given team was eliminated or where their season ended (R68 = First Four, R64 = Round of 64, R32 = Round of 32, S16 = Sweet Sixteen, E8 = Elite Eight, F4 = Final Four, 2ND = Runner-up, Champion = Winner of the NCAA March Madness Tournament for that given year)
+- seed: Seed in the NCAA March Madness Tournament
+
+There were a total of 351 observations, which was a reference to the 351 Divison 1 schools that played during the 2015-2016 season. 2 additional Binary Columns (SEEDED_TEAM and MADE_POST), determined whether the team was seeded prior to entering the NCAA Tournament, and whether or not the team made the NCAA Tournament. This dataset is missing all of the Division II and lower teams that could've made the tournament despite being seeded, so all of the teams that made the final tournament in this case were seeded. 
+
+
+# 1.) Hypothesis Testing
+```{R}
+bball_dat <- bball %>% mutate(SEEDED_TEAM = if_else(is.na(SEED), 0,1)) %>% mutate(MADE_POST = if_else(is.na(POSTSEASON), 0,1))
+
+conf_names <- c("B12", "BE","SC")
+bball_dat2 <- bball_dat %>% filter(CONF %in% conf_names)
+
+Bball <-manova(cbind(G, W, ADJOE, ADJDE, EFG_O, EFG_D, ORB) ~ CONF, data = bball_dat2)
+summary(Bball)
+```
+- I was interested in seeing if there were any factors which described which conference the team belonged to during the 2015/16 season. I chose 3 conferences at random for this MANOVA (Big12, BigEast, and Southern Conference), due to the fact that there are >25 conferences playing in Division 1, making it much more difficult to determine significant differences among all of them. Running the MANOVA showed that there was in fact a mean difference among at least 1 of the tested variables; Pillai Trace = 1.0434, pseudo F(14, 44) = 3.428, p < 0.001.
+
+```{R}
+summary.aov(Bball)
+
+1 - (0.95)^8
+
+0.05/8
+```
+
+With a 33.66% chance of a Type 1 error occuring, the bonferroni adjusted significance value was set to 0.00625. Even with this adjustment, ANOVA's suggested that there were significant differences found between the means for ADJOE(F(2,27) = 9.1368), ADJDE(F(2,27) = 28.519), and EFG_D(F(2,27) = 8.9439) betwen conferences. p < 0.001 for all of these comparisons.
+
+```{R}
+pairwise.t.test(bball_dat2$ORB,bball_dat2$CONF, p.adj = "none")
+pairwise.t.test(bball_dat2$EFG_D,bball_dat2$CONF, p.adj = "none")
+pairwise.t.test(bball_dat2$EFG_O,bball_dat2$CONF, p.adj = "none")
+pairwise.t.test(bball_dat2$ADJDE,bball_dat2$CONF, p.adj = "none")
+pairwise.t.test(bball_dat2$ADJOE,bball_dat2$CONF, p.adj = "none")
+pairwise.t.test(bball_dat2$W,bball_dat2$CONF, p.adj = "none")
+pairwise.t.test(bball_dat2$G,bball_dat2$CONF, p.adj = "none")
+
+
+1- 0.95^29
+
+0.05/29
+
+```
+With an 77.41% overall chance of a type 1 error, a bonferroni adjustment was made to the significance value, now 0.00172. Post-hoc pairwise t-tests indicated that significant differences occurred only between the B12 and SC conference on ADJOE, ADJDE, and EFG_D, and only between BE and SC on ADJDE and EFG_D. It was interesting to note that all of these categories in which significant differences were found between the conferences were in the quality of the team's defenses. There were no significant differences found between BE and B12 for any of the characteristics. This lack of significant differences is likely due to the fact that the rankings for BE and B12 are near the top, and the ranking for SC is middling, meaning that the quality of the teams in BE and B12 are likely to be very high and extremely similar, while the quality of teams in the SC conference would be much worse. 
+
+# 2.) Randomization Test
+Due to the fact that the way individuals play in college basketball is largely indicative of their proposed ability in the NBA, many college teams/players adopt strategies which mirror that of succesful NBA teams. 
+
+In that manner, I wanted to investigate the new focus on offensive efficiency held by the NBA to see if college teams that also undertook more efficient shots were also likely to be successful, determined by whether or not they made the postseason tournament. For this, I will be determing if a significant mean difference occurs between ADJOE(An estimate of the number of points a team would score per 100 possesions against the average Division 1 defense) and whether or not the team made the post-season. Under the null hypothesis that there is no significant mean difference in efficient offenses and achieving a high number of wins, and the alternative hypothesis that such a significant mean difference does exist, I will permute the data to visualize a sampling distributoin of the mean differences
+```{R}
+set.seed(348)
+bballrt <- bball_dat %>% select(MADE_POST, CONF, TEAM, ADJDE, ADJOE)
+bballrt <- bballrt %>% mutate(MADE_POST = ifelse(MADE_POST == 0,"N","Y"))
+bballrt %>% group_by(MADE_POST) %>% summarize(mean(ADJOE))
+
+111.6647 - 101.9926
+
+rand_dist <- vector()
+
+for(i in 1:5000) {
+    new <- data.frame(eff = sample(bballrt$ADJOE), post = bballrt$MADE_POST)
+    rand_dist[i] <- mean(new[new$post == "Y", ]$eff) - mean(new[new$post == "N", ]$eff)
+}
+
+mean(rand_dist > (9.6721)) * 2
+
+```
+
+The probabilty of getting the true mean difference within this randomized dataset is 0, indicating that I can reject the null hypothesis
+
+
+```{R}
+{
+    hist(rand_dist, main = "", ylab = "", xlim = c(-60, 90))
+    abline(v = 9.6721, col = "red")
+}
+```
+
+A histogram fo the sampling distribution indicates that the true mean value isn't found wihtin the range of the permuted dataset, confirming the earlier conclusion
+
+
+# 3.) Linear Regression
+
+I will now utilize a linear regression model to see if it is possible to correlate the 
+efficency of a teams offense (ADJOE) by the number of Defensive Rebounds a team has per game (DRB) and the number of steals a team has per game (TORD). I'd like to investigate these two variables, as in basketball one of the commonly held theories is that offensive capabilities of a team is largely determined by their ability to recover the ball. I'd like to personally see if that correlation actually is true. 
+
+```{R}
+linset <- bball %>% select(ADJOE, DRB, TORD)
+bball_lm <- lm(ADJOE ~ DRB * TORD, data = linset)
+coeftest(bball_lm)
+
+```
+For every 1 increase in the offensive efficiency of a team, there is an average 1.207 increase in the number of steals per game, as well as 0.282 increase in the number of defensive rebounds per game. The slope of the number of defensive rebounds per game vs offensive effiency is 0.0513 smaller than that of number of steals per game and offensive efficiency. The importance of this is that you can see the impact that turnovers have on overall offensive efficiency, and that it is higher than that of simply recovering the ball following a poor shot by the other team. 
+
+```{R}
+
+linset %>% ggplot(aes(ADJOE, DRB)) + geom_point() + geom_smooth(method = "lm", se = F)
+linset %>%ggplot(aes(ADJOE, TORD)) + geom_point() + geom_smooth(method = "lm", se = F)
+```
+A regression plot helps determine this separation between the DRB and TORD's impact on the overall offensive efficiency of the team.
+
+
+```{R}
+
+resids <- bball_lm$residuals
+fitvals <- bball_lm$fitted.values
+ggplot() + geom_histogram(aes(resids), bins = 20)
+
+bptest(bball_lm)
+```
+The assumption of linearity is not met for both variables, however the assumption for independent observations and random sampling is met. The assumptions for normality are met, yet the assumptions for heteroskedasticity are not.
+
+```{R}
+library(sandwich)
+coeftest(bball_lm, vcov = vcovHC(bball_lm))
+summary(bball_lm)
+```
+With robust standard errors, there is not any significant effect of either defensive rebounding or number of steals per game on the offensive efficiency of the team. In comparison to the original model, there has been an increase in the p-values, however both models show the lack of correlation between these 2 variables and the offensive efficiency of the team. This model only explains aorund 8.282% of the variation in the outcome, which is largely indicative of why no significant correlation was found.
+
+
+
+- **4. (5 pts)** Rerun same regression model (with interaction), but this time compute bootstrapped standard errors. Discuss any changes you observe in SEs and p-values using these SEs compared to the original SEs and the robust SEs)
+
+# 4.) Bootstrapped Standard Errors
+
+```{R}
+samp_distn <- replicate(5000, {
+    boot_dat <- linset[sample(nrow(linset), replace = TRUE), 
+        ]
+    fit <- lm(ADJOE ~ DRB * TORD, data = boot_dat)
+    coef(fit)
+})
+coeftest(bball_lm)[, 1:2]
+coeftest(bball_lm, vcov = vcovHC(bball_lm))[, 1:2]
+samp_distn %>% t %>% as.data.frame %>% summarize_all(sd)
+samp_distn %>% t %>% as.data.frame %>% gather %>% group_by(key) %>% 
+    summarize(lower = quantile(value, 0.025), upper = quantile(value, 
+        0.975))
+
+
+
+```
+The bootstrapped standard errors are larger than those of the original model, but smaller than the robust standard errors. All estimates of these values fall within the 95% confidence interval for the bootstrapped model, giving significance to the lack of interaction displayed by the model. 
+
+
+# 5.) Logistic Regression
+I created a logistic regression which interpreted the impact of being within the Big 12 conference on the percentage of 2-Point(X2P_O) and 3-Point(X3P_O) shots made.
+```{R}
+newdat <- bball_dat %>% filter( !is.na(X2P_O), !is.na(X3P_O), !is.na(CONF)) %>% mutate(X3P_O_c = X3P_O - mean(X3P_O), X2P_O_c = X2P_O - mean(X2P_O), B12 = ifelse(CONF == "B12", 1,0)) %>% select (X3P_O_c, X2P_O_c, B12)
+
+newdat_log <- glm(B12 ~ X2P_O_c + X3P_O_c, data = newdat, family= binomial)
+
+coeftest(newdat_log)
+
+exp(-3.624 + 0.0425)
+exp(.1349 - 0.0425)
+
+
+```
+A 1 % increase in the number of 2-Pointers made increases the probability of the team being in the Big 12 conference by e^(-3.5815) or 2.78%, and a 1 % percent increase in the 3-Pointers made increases the probability of the team being in the Big 12 conference by e^(0.0924) or by 109.7%. 
+
+
+```{R}
+prob <- predict(newdat_log, type = "response")
+pred <- ifelse(prob >0.05, 1,0)
+table(truth = newdat$B12, prediction = pred) %>% addmargins
+(327+3)/351 # accuracy
+(327/341) #TPR
+(3/10) #TNR
+(327/354) #PPV
+```
+According to the confusion matrix, this model has an accuracy of 94.012%, sensitivity of 95.90%, specificity of 30%, 92.37%.  
+
+```{R}
+newdat$logit <- predict(newdat_log, type = "link")
+newdat %>% ggplot() + geom_density(aes(logit, color = B12, 
+    fill = B12), alpha = 0.4) + theme(legend.position = c(0.85, 
+    0.85)) + geom_vline(xintercept = 0) + xlab("predictor (logit)")
+```
+According to the density plot, a cutoff value of zero fairly accurately predicts whether the team was a part of the B12 conference.
+
+```{R}
+library(plotROC)
+ROCplot <- ggplot(newdat) + geom_roc(aes(d = B12, m = prob), 
+    n.cuts = 0)
+ROCplot
+calc_auc(ROCplot)
+```
+The ROC plot for this model doesn't depict a very exponential curve, and the AUC for this model is 0.565, which indicates that this model is a very poor predictor of whether or not the team is part of the Big 12 conference. 
+
+```{R}
+set.seed(1234)
+# 
+# class_diag <- function(probs,truth){
+#   
+#   #CONFUSION MATRIX: CALCULATE ACCURACY, TPR, TNR, PPV
+#   tab<-table(factor(probs>.05,levels=c("FALSE","TRUE")),truth)
+#   
+#   acc=sum(diag(tab))/sum(tab)
+#   sens=tab[2,2]/colSums(tab)[2]
+#   spec=tab[1,1]/colSums(tab)[1]
+#   ppv=tab[2,2]/rowSums(tab)[2]
+# 
+#   if(is.numeric(truth)==FALSE & is.logical(truth)==FALSE) truth<-as.numeric(truth)-1
+#   
+#   #CALCULATE EXACT AUC
+#   ord<-order(probs, decreasing=TRUE)
+#   probs <- probs[ord]; truth <- truth[ord]
+#   
+#   TPR=cumsum(truth)/max(1,sum(truth)) 
+#   FPR=cumsum(!truth)/max(1,sum(!truth))
+#   
+#   dup<-c(probs[-1]>=probs[-length(probs)], FALSE)
+#   TPR<-c(0,TPR[!dup],1); FPR<-c(0,FPR[!dup],1)
+#   
+#   n <- length(TPR)
+#   auc<- sum( ((TPR[-1]+TPR[-n])/2) * (FPR[-1]-FPR[-n]) )
+# 
+#   data.frame(acc,sens,spec,ppv,auc)
+# }
+
+k = 10
+
+data1 <- newdat[sample(nrow(newdat)), ]
+folds <- cut(seq(1:nrow(newdat)), breaks = 10, labels = F)
+
+#diags <- NULL
+for (i in 1:10) {
+    train <- data1[folds!= i,]
+    test <- data1[folds== i,]
+    truth <- test$B12
+    
+    fit <- glm(B12 ~ X2P_O_c + X3P_O_c, data = train, family = "binomial")
+    probs <- predict(fit, newdata = test, type = "response")
+    
+    #diags <- rbind(diags,  class_diag(probs, truth))
+}
+
+#summarize_all(diags, mean)
+```
+A 10 fold CV was attempted, yet however this ended up failing due to the fact that the test variable only carried 1 of the 2 binary values for the B12 variable. This issue means that while attempting to solve for values such as PPV, Sensitivity, and Specificity, the values would be wholly skewed and that either the TNR or the TPR could be calculated, but not both. This means that the class_diag function would throw up a subscript out of bounds error, causing the results to be undeterminable. However, given the state of this model, I can hypothesize that it would give similar results to the earlier model, showing a poor rate of accuracy among the correlations being drawn.
+
+# 6.) Lasso Regression
+
+
+```{R}
+newdat2  <- bball_dat %>% filter( !is.na(X2P_O), !is.na(X3P_O), !is.na(CONF), !is.na(DRB), !is.na(TORD), !is.na(ADJDE)) %>% mutate(B12 = ifelse(CONF == "B12", 1,0)) %>% select (X3P_O, X2P_O, B12, DRB, TORD, ADJDE)
+
+
+newdatfit <- glm(B12 ~ -1 + X3P_O + DRB + TORD + ADJDE + X2P_O, data = newdat2, family = "binomial")
+x <- model.matrix(newdatfit)
+x <- scale(x)
+y <- as.matrix(newdat2$B12)
+cv2 <- cv.glmnet(x, y, family = "binomial")
+lasso <- glmnet(x, y, family = "binomial", lambda = cv2$lambda.1se)
+coef(cv2)
+```
+Considering a set of predictors to see if any could be utilized to determine whether or not a team was part of the Big 12 conference, it seemed that the only factor that could reliably determine this was ADJDE(efficiency of the defense). This is interesting to note, as it seems that the more important factor determining was the defense of a team, rather than their offensive capabilities
+
+```{R}
+
+k = 10
+data1 <- newdat2[sample(nrow(newdat2)), ]
+folds <- cut(seq(1:nrow(newdat2)), breaks = k, labels = F)
+#diags2 <- NULL
+
+for (i in 1:k) {
+    train <- data1[folds != i, ]
+    test <- data1[folds == i, ]
+    truth <- test$B12
+    fit <- glm(B12 ~ -1 + ADJDE, data = train, 
+        family = "binomial")
+    probs <- predict(fit, newdata = test, type = "response")
+    ## Test model on test set (save all k results)
+    #diags2 <- rbind(diags, class_diag(probs, truth))
+}
+
+#diags2 %>% summarize_all(mean)
+
+
+
+
+```
+Again the values here couldn't be properly interpreted, as the values for the test dataframe only had 1 type of variable from the binary variable B12, causing class_diag to not funciton properly and throw up a subscript out of bounds error. However, I'm hypothesisizing that the results that would've been produced would've likely backed up the lasso regularizations findings that the defensive efficiency of teams would be a good way to determine whether or not a team was a part of the Big12 Conference or not.
+
+
+
+...
+
+
+
+
+
