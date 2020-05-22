@@ -12,7 +12,7 @@ theme = "hugo-sustain"
 
 [params]
   avatar = "photo.png"
-  author = "Neel Homchowdhury"
+  author = "Neel Homochowdhury"
   description = "Describe your website"
 
   # Custom assets can be linked with their paths relative to static/

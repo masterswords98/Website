@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Neel Homchowdhury" />
+    <meta name="author" content="Neel Homochowdhury" />
     <meta name="description" content="Describe your website">
-    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
     <title>Project 2: Modeling, Testing, and Predicting</title>
     <meta name="generator" content="Hugo 0.70.0" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
     
@@ -29,7 +29,7 @@
       <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="../"><i class="fa fa-home"></i></a>
+      <a class="navbar-brand" href="/"><i class="fa fa-home"></i></a>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -40,9 +40,9 @@
       <ul class="nav navbar-nav navbar-right">
       
         
-        <li><a href="../blog/">BLOG</a></li>
+        <li><a href="/blog/">BLOG</a></li>
         
-        <li><a href="../projects/">PROJECTS</a></li>
+        <li><a href="/projects/">PROJECTS</a></li>
         
         <li><a href="resume_Neel.pdf">RESUME</a></li>
         
@@ -56,7 +56,7 @@
       <div class="container">
         <div class="blog-post">
           <h3>
-            <strong><a href="../project2/">Project 2: Modeling, Testing, and Predicting</a></strong>
+            <strong><a href="/project2/">Project 2: Modeling, Testing, and Predicting</a></strong>
           </h3>
         </div>
         <div class="blog-title">
@@ -327,7 +327,7 @@ mean(rand_dist &gt; (9.6721)) * 2</code></pre>
     hist(rand_dist, main = &quot;&quot;, ylab = &quot;&quot;, xlim = c(-60, 90))
     abline(v = 9.6721, col = &quot;red&quot;)
 }</code></pre>
-<p><img src="../project2_files/figure-html/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="/project2_files/figure-html/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>A histogram fo the sampling distribution indicates that the true mean value isn’t found wihtin the range of the permuted dataset, confirming the earlier conclusion</p>
 </div>
 <div id="linear-regression" class="section level1">
@@ -349,13 +349,13 @@ coeftest(bball_lm)</code></pre>
 &#39; &#39; 1</code></pre>
 <p>For every 1 increase in the offensive efficiency of a team, there is an average 1.207 increase in the number of steals per game, as well as 0.282 increase in the number of defensive rebounds per game. The slope of the number of defensive rebounds per game vs offensive effiency is 0.0513 smaller than that of number of steals per game and offensive efficiency. The importance of this is that you can see the impact that turnovers have on overall offensive efficiency, and that it is higher than that of simply recovering the ball following a poor shot by the other team.</p>
 <pre class="r"><code>linset %&gt;% ggplot(aes(ADJOE, DRB)) + geom_point() + geom_smooth(method = &quot;lm&quot;, se = F)</code></pre>
-<p><img src="../project2_files/figure-html/unnamed-chunk-8-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="/project2_files/figure-html/unnamed-chunk-8-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>linset %&gt;%ggplot(aes(ADJOE, TORD)) + geom_point() + geom_smooth(method = &quot;lm&quot;, se = F)</code></pre>
-<p><img src="../project2_files/figure-html/unnamed-chunk-8-2.png" width="768" style="display: block; margin: auto;" /> A regression plot helps determine this separation between the DRB and TORD’s impact on the overall offensive efficiency of the team.</p>
+<p><img src="/project2_files/figure-html/unnamed-chunk-8-2.png" width="768" style="display: block; margin: auto;" /> A regression plot helps determine this separation between the DRB and TORD’s impact on the overall offensive efficiency of the team.</p>
 <pre class="r"><code>resids &lt;- bball_lm$residuals
 fitvals &lt;- bball_lm$fitted.values
 ggplot() + geom_histogram(aes(resids), bins = 20)</code></pre>
-<p><img src="../project2_files/figure-html/unnamed-chunk-9-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="/project2_files/figure-html/unnamed-chunk-9-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>bptest(bball_lm)</code></pre>
 <pre><code>## 
 ##  studentized Breusch-Pagan test
@@ -482,12 +482,12 @@ table(truth = newdat$B12, prediction = pred) %&gt;% addmargins</code></pre>
 newdat %&gt;% ggplot() + geom_density(aes(logit, color = B12, 
     fill = B12), alpha = 0.4) + theme(legend.position = c(0.85, 
     0.85)) + geom_vline(xintercept = 0) + xlab(&quot;predictor (logit)&quot;)</code></pre>
-<p><img src="../project2_files/figure-html/unnamed-chunk-14-1.png" width="768" style="display: block; margin: auto;" /> According to the density plot, a cutoff value of zero fairly accurately predicts whether the team was a part of the B12 conference.</p>
+<p><img src="/project2_files/figure-html/unnamed-chunk-14-1.png" width="768" style="display: block; margin: auto;" /> According to the density plot, a cutoff value of zero fairly accurately predicts whether the team was a part of the B12 conference.</p>
 <pre class="r"><code>library(plotROC)
 ROCplot &lt;- ggplot(newdat) + geom_roc(aes(d = B12, m = prob), 
     n.cuts = 0)
 ROCplot</code></pre>
-<p><img src="../project2_files/figure-html/unnamed-chunk-15-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="/project2_files/figure-html/unnamed-chunk-15-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>calc_auc(ROCplot)</code></pre>
 <pre><code>##   PANEL group       AUC
 ## 1     1    -1 0.5653959</code></pre>
@@ -631,10 +631,10 @@ for (i in 1:k) {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="../js/docs.min.js"></script>
-<script src="../js/main.js"></script>
+<script src="/js/docs.min.js"></script>
+<script src="/js/main.js"></script>
 
-<script src="../js/ie10-viewport-bug-workaround.js"></script>
+<script src="/js/ie10-viewport-bug-workaround.js"></script>
 
 
     

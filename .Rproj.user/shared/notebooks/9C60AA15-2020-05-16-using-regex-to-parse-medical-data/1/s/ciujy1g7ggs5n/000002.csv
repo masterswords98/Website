@@ -1,3 +1,0 @@
-"0","library(reticulate)"
-"0","Sys.setenv(RETICULATE_PYTHON=""/usr/bin/python"")"
-"0","use_python(""usr/bin/python"")"

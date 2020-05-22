@@ -1,15 +1,9 @@
 ---
 title: 'Project 2: Modeling, Testing, and Predicting'
-author: "SDS348"
-date: ''
+author: "Neel Homchowdhury"
 output:
-  pdf_document:
-    toc: yes
-  html_document:
-    toc: yes
-    toc_float:
-      collapsed: no
-      smooth_scroll: yes
+  html_document
+date: '2020-05-13'
 ---
 
 ```{r setup, include=FALSE}
