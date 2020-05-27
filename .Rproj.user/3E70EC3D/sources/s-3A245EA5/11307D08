@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1590613828100.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1714417001",
+    "id" : "11307D08",
+    "lastKnownWriteTime" : 1590612456,
+    "last_content_update" : 1590612456,
+    "path" : "~/Documents/GitHub/Website/themes/mero/layouts/partials/head.html",
+    "project_path" : "themes/mero/layouts/partials/head.html",
+    "properties" : {
+        "cursorPosition" : "0,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "html"
+}

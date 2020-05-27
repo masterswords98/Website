@@ -1,4 +1,4 @@
-baseURL = "http://example.org/"
+baseURL = "/"
 languageCode = "en-us"
 title = "My Blog"
 theme = "mero"
@@ -6,18 +6,18 @@ disableKinds = ["taxonomyTerm"]
 
 [params]
   dateFormat = "2006-01-02" 
-  author = "Firstname Lastname"
-  description = "My awesome blog"
-  mainImage = "images/main.jpeg"
+  author = "Neel Homchowdhury"
+  description = "Data Scientist/Data Analytics"
+  mainImage = "images/main2.jpeg"
 
 [params.introduction]
-   text = "**This website** is my blog. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+   text = "**This website** is a collection of my thoughts, more information about me, and the projects I've both been apart of in the past, and am currently working on now! Please feel free to take a look around, and get in touch with me if you'd like to talk!"
 
 [params.social]
   [[params.social.list]]
   class = "fab"
   icon = "fa-linkedin-in"
-  url = "#"
+  url = "https://www.linkedin.com/in/neel-homchowdhury-42807b178/"
 
   [[params.social.list]]
   class = "fab"
@@ -26,13 +26,13 @@ disableKinds = ["taxonomyTerm"]
 
   [[params.social.list]]
   class = "fab"
-  icon = "fa-twitter"
-  url = "#"
+  icon = "fa-instagram"
+  url = "https://www.instagram.com/kneelb4neel/"  
 
   [[params.social.list]]
-  class = "fab"
-  icon = "fa-stack-overflow"
-  url = "#"  
+  class = "far"
+  icon = "fa-envelope"
+  url = "mailto:neelhom@gmail.com?"  
 
 [params.footer]
-  message = "&copy; 2018 Name"
+  message = "&copy; 2020 Neel Homchowdhury"
