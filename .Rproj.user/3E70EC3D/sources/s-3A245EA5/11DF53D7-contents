@@ -1,4 +1,0 @@
-{{ define "main" }}
-<h1 class="mt-4">All Taxa</h1>
-{{ partial "taxa" (dict "this" $.Site.Taxonomies "showAll" true "heading" "All Taxa") }}
-{{ end }}
