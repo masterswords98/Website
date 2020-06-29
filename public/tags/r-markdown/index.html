@@ -1,219 +1,130 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-  <title>My Blog</title>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <meta name="description" content="Data Scientist/Data Analytics" />
-  <meta name="author" content="Neel Homchowdhury" />
-  <meta name="generator" content="mero theme by Darshan in Hugo 0.70.0" />
+<html lang="en">
 
-  <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-    crossorigin="anonymous"
-  />
-  <link
-    rel="stylesheet"
-    href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-  />
-  <link
-    href="https://fonts.googleapis.com/css?family=Overlock|Roboto+Mono&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="/css/mero.css" />
+	<head>
+		<title> R Markdown &middot; Hugo Website </title>
 
-  <script src="/js/mero.js"></script>
-</head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.70.0" />
 
-  <body class="bg-dark text-white m-auto" style="width:95%; max-width: 1024px;">
-    <div class="wrapper">
-      <nav class="mb-3 mt-3 ml-1">
-  <div class="d-flex flex-row">
-    <div
-      class="menu-item border border-warning bg-dark p-2"
-      style="border-top-left-radius: 10px; border-bottom-left-radius: 10px;"
-    >
-      <a href="/"><span>Home</span> </a>
-    </div>
-    <div class="menu-item dropdown border border-warning bg-dark p-2">
-      <span class="dropbtn text-warning" onclick="toggleMenu(this)"
-        >Sections <i class="fas fa-angle-down"></i
-      ></span>
-      <div
-        class="dropdown-content p-2 bg-dark2 mt-2 rounded w-auto mt-1 d-none"
-        style="min-width: 200px;"
-      >
-        <ul class="list-unstyled">
-          
-          
-          
-          <li class="pt-2">
-            <a href="/post/">Posts</a>
-          </li>
-          
-          
-          
-          
-          <li class="pt-2">
-            <a href="/blogs/">Blogs</a>
-          </li>
-          
-          
-          
-          
-          
-          
-          
-          
-        </ul>
-      </div>
-    </div>
-    <div class="menu-item border border-warning bg-dark p-2">
-      <a
-        href="/alltaxa/"
-        ><span>Taxa</span>
+
+
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="/css/nix.css">
+
+
+
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Inconsolata%7COpen+Sans%7CConcert+One" rel="stylesheet">
+
+
+
+
+
+
+	</head>
+
+	<body>
+		<header>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse font-header">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+      <a class="navbar-brand" id="green-terminal" href='/'>
+        neel@gohugo.io ~ $
       </a>
-    </div>
-    <div class="menu-item border border-warning bg-dark p-2"
-    style="border-top-right-radius: 10px; border-bottom-right-radius: 10px;">
-      <a
-        href="/archive/"
-        ><span>Archive</span>
-      </a>
-    </div>
-  </div>
-</nav>
+		</div>
 
-      <main>
+		
+		<div class="collapse navbar-collapse" id="navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a href='/'>/home/neel</a>
+        </li>
         
-<main>
-  <h1 class="mt-4">R Markdown</h1>
-  <div class="d-flex flex-column">
-    
-    <div
-      class="border mt-3 mb-3 p-3 rounded position-relative"
-    >
-      <h3 class="mb-0">
-        <a href="/post/2015-07-23-r-rmarkdown/" class="article-titles">Hello R Markdown</a>
-      </h3>
-      <div
-      class="bg-dark pl-1 pr-1"
-      style="position: absolute; top: -1rem; left: 5px;"
-    >
-      <small>
-        <time>2015-07-23</time>
-      </small>
-      <span
-        class="more"
-        style="font-size: 1.2em;"
-        title="Show Metadata"
-        onclick="showMetadata(this)"
-      >
-        &#43;
-      </span>
-    </div>
-    <div class="m-2 metadata overflow-hidden" style="max-height: 0px;">
-  
-  <div class="metadata-value mb-1 taxa taxa-container-div list-sections">
-    <div>
-      Reading Time: 
-1 min
-      
-    </div>
-    <div>
-      Section:
-      <a
-        class="pl-1 pr-1 rounded border border-secondary"
-        href="/post"
-        title="Section"
-      >Posts</a>
-    </div>
-  </div>
-  
+				
+				
+				<li class="dropdown">
+                    
+            		<a href="/about">~/about</a>
+            		
+        		</li>
+        		
+				
+				<li class="dropdown">
+                    
+            		<a href="/post">~/posts</a>
+            		
+        		</li>
+        		
 
-  
-  
-  
-  <div class="metadata-value mb-1 taxa taxa-container-div list-categories">
-    Categories:
-    
-    <a
-      class="pl-1 pr-1 rounded border border-secondary"
-      href="/categories/r"
-      title="categories"
-    >R</a>
-    
-  </div>
-  
-  
-  
-  <div class="metadata-value mb-1 taxa taxa-container-div list-tags">
-    Tags:
-    
-    <a
-      class="pl-1 pr-1 rounded border border-secondary"
-      href="/tags/r-markdown"
-      title="tags"
-    >R Markdown</a>
-    
-    <a
-      class="pl-1 pr-1 rounded border border-secondary"
-      href="/tags/plot"
-      title="tags"
-    >plot</a>
-    
-    <a
-      class="pl-1 pr-1 rounded border border-secondary"
-      href="/tags/regression"
-      title="tags"
-    >regression</a>
-    
-  </div>
-  
-  
-</div>
+			</ul>
+		</div>
+	</div>
+</nav>
+</header>
+
+		<div class="flex-wrapper">
+			<div class="container wrapper">
+				<div class="row">
+					<div class="col-xs-12 text-center">
+						<h1 id=>R Markdown</h1>
+					</div>
+				</div>
+				<ul id="post-list">
+						
+					<li>
+						<div class="post-list-item">
+							<div class="post-header">
+								<h4 class="post-link"><a href="/post/2015-07-23-r-rmarkdown/">Hello R Markdown</a></h4>
+								<h4 class="post-date">2015-07-23</h4>
+							</div>
+							<div class="post-summary"><p>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</p></div>
+							<div class="post-list-footer text-center">
+								<a href="/post/2015-07-23-r-rmarkdown/">Read More</a>
+							</div>
+						</div>
+					</li>
+				
+				</ul>
+				
 
 
-      
-    </div>
-    
-  </div>
-  <div class="d-flex justify-content-center">
-    
 
-
-  </div>
-</main>
-<script>
-  let showMetadata = function(x) {
-    let elem = x.parentNode.nextElementSibling;
-    if (window.getComputedStyle(elem)["height"] === "0px") {
-      elem.style.maxHeight = elem.scrollHeight + "px";
-      x.innerHTML = "&times;";
-      x.title = "Hide Metadata";
-    } else {
-      elem.style.maxHeight = "0px";
-      x.innerHTML = "&#43;";
-      x.title = "Show Metadata";
-    }
-  };
-</script>
-
-
-      </main>
-    </div>
-    <footer>
-  <div class="w-50 bg-danger ml-auto mr-auto mt-4" style="height: 2px;"></div>
-  <div class="mt-4 mb-2" style="font-size: 0.9em;">
-    <p class="text-center">
-      &copy; 2020 Neel Homchowdhury |
-      <a href="https://github.com/darshanbaral/mero.git">mero</a> theme by
-      <a href="https://www.darshanbaral.com">Darshan</a>
-    </p>
-  </div>
+			</div>
+			<footer class="footer text-center">
+<p>Copyright &copy; 2020 Neel Homchowdhury -
+<span class="credit">
+	Powered by
+	<a target="_blank" href="https://gohugo.io">Hugo</a>
+	and
+	<a target="_blank" href="https://github.com/LordMathis/hugo-theme-nix/">Nix</a> theme.
+</span>
+</p>
 </footer>
 
-  </body>
+		</div>
+	</body>
 </html>

@@ -1,193 +1,157 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-  <title>My Blog</title>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <meta name="description" content="Data Scientist/Data Analytics" />
-  <meta name="author" content="Neel Homchowdhury" />
-  <meta name="generator" content="mero theme by Darshan in Hugo 0.70.0" />
+	<head>
+		<title> Hugo Website </title>
 
-  <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-    crossorigin="anonymous"
-  />
-  <link
-    rel="stylesheet"
-    href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-  />
-  <link
-    href="https://fonts.googleapis.com/css?family=Overlock|Roboto+Mono&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="/css/mero.css" />
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.70.0" />
 
-  <script src="/js/mero.js"></script>
-</head>
 
-  <body class="bg-dark text-white m-auto" style="width:95%; max-width: 1024px;">
-    <div class="wrapper">
-      <nav class="mb-3 mt-3 ml-1">
-  <div class="d-flex flex-row">
-    <div
-      class="menu-item border border-warning bg-dark p-2"
-      style="border-top-left-radius: 10px; border-bottom-left-radius: 10px;"
-    >
-      <a href="/"><span>Home</span> </a>
-    </div>
-    <div class="menu-item dropdown border border-warning bg-dark p-2">
-      <span class="dropbtn text-warning" onclick="toggleMenu(this)"
-        >Sections <i class="fas fa-angle-down"></i
-      ></span>
-      <div
-        class="dropdown-content p-2 bg-dark2 mt-2 rounded w-auto mt-1 d-none"
-        style="min-width: 200px;"
-      >
-        <ul class="list-unstyled">
-          
-          
-          
-          <li class="pt-2">
-            <a href="/post/">Blog</a>
-          </li>
-          
-          
-          
-          
-          <li class="pt-2">
-            <a href="/blogs/">Projects</a>
-          </li>
-          
-          
-          
-          <li class="pt-2">
-            <a href="/blogs/">Resume</a>
-          </li>
-          
+
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="/css/nix.css">
+
+
+
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Inconsolata%7COpen+Sans%7CConcert+One" rel="stylesheet">
+
+
+
+
+
+
+
+	</head>
+	<body>
+		<header>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse font-header">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+      <a class="navbar-brand" id="green-terminal" href='/'>
+        neel@gohugo.io ~ $
+      </a>
+		</div>
+
+		
+		<div class="collapse navbar-collapse" id="navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a href='/'>/home/neel</a>
+        </li>
         
-          
-          
-          
-          
-        </ul>
-      </div>
-    </div>
-    <div class="menu-item border border-warning bg-dark p-2">
-      <a
-        href="/alltaxa/"
-        ><span>Taxa</span>
-      </a>
-    </div>
-    <div class="menu-item border border-warning bg-dark p-2"
-    style="border-top-right-radius: 10px; border-bottom-right-radius: 10px;">
-      <a
-        href="/archive/"
-        ><span>Archive</span>
-      </a>
-    </div>
-  </div>
+				
+				
+				<li class="dropdown">
+                    
+            		<a href="/about">~/about</a>
+            		
+        		</li>
+        		
+				
+				<li class="dropdown">
+                    
+            		<a href="/post">~/posts</a>
+            		
+        		</li>
+        		
+
+			</ul>
+		</div>
+	</div>
 </nav>
+</header>
 
-      <main>
-        
-<div class="d-flex flex-row flex-wrap justify-content-around">
-  <div class="mt-4 home-flex-item" style="width: calc(35% - 20px); min-width: 250px;">
-    <img class="w-100 rounded mb-2" src="/images/main2.jpeg" />
-<div class="d-flex justify-content-center mt-2">
-  
-  <div class="ml-1 mr-1" style="width: 40px; height: 40px;">
-    <a href="https://www.linkedin.com/in/neel-homchowdhury-42807b178/">
-      <i class="social-icon fab fa-linkedin-in"></i>
-    </a>
-  </div>
-  
-  <div class="ml-1 mr-1" style="width: 40px; height: 40px;">
-    <a href="#">
-      <i class="social-icon fab fa-github"></i>
-    </a>
-  </div>
-  
-  <div class="ml-1 mr-1" style="width: 40px; height: 40px;">
-    <a href="https://www.instagram.com/kneelb4neel/">
-      <i class="social-icon fab fa-instagram"></i>
-    </a>
-  </div>
-  
-  <div class="ml-1 mr-1" style="width: 40px; height: 40px;">
-    <a href="mailto:neelhom@gmail.com?">
-      <i class="social-icon far fa-envelope"></i>
-    </a>
-  </div>
-  
-</div>
+		<div class="flex-wrapper">
+			<div class="container wrapper">
+				
+				<div class="row">
+					<div class="col-sm-3 col-centered">
+						<img alt="profile-picture" class="img-responsive img-circle user-picture center-block" src="https://scontent-dfw5-1.xx.fbcdn.net/v/t1.0-9/52797043_1150725361767990_1631090379858116608_o.jpg?_nc_cat=110&amp;_nc_sid=7aed08&amp;_nc_ohc=Iw76XWPMyvUAX8Z0anu&amp;_nc_ht=scontent-dfw5-1.xx&amp;oh=074c54344193b2ab8900b9b7ec11aeeb&amp;oe=5F2055FB">
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-12 user-profile text-center">
+						<h1 id="user-name">Neel Homchowdhury</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 user-social text-center">
+					
 
-  </div>
 
-  <div class="home-flex-item mt-4" style="width: calc(65% - 20px);">
-    <div class="position-relative border rounded p-2" style="margin-bottom: 40px;">
-      <h4
-  class="pl-2 pr-2 bg-dark rounded border"
-  style="position: absolute; top: -1rem; right: 0.5em;"
->
-  <b>About</b>
-</h4>
-<h1>I am Neel Homchowdhury.</h1>
-<p><strong>This website</strong> is a collection of my thoughts, more information about me, and the projects I&rsquo;ve both been apart of in the past, and am currently working on now! Please feel free to take a look around, and get in touch with me if you&rsquo;d like to talk!</p>
 
-    </div>
-    <div class="home-flex-item position-relative p-2 border rounded text-center">
-      <h4
-  class="pl-2 pr-2 bg-dark rounded border"
-  style="position: absolute; top: -0.7em; left: 0.5em;"
->
-  <b>Recent</b>
-</h4>
 
-<div class="pt-2">
-  
-  <a class="ml-1 list-entry-link text-uppercase" href="/blog/post-1/">
-    Create new hugo theme
-  </a>
-  <p class="ml-2 mb-1">A brief summary for the post 1. And this is slightly longer than the others. And this one also has three sentences. Nevermind, this one actually has four sentences.</p>
-  
-  <a class="ml-1 list-entry-link text-uppercase" href="/blogs/blog-1/">
-    Title of the blog 1
-  </a>
-  <p class="ml-2 mb-1">A brief summary for the blog 1</p>
-  
-  <a class="ml-1 list-entry-link text-uppercase" href="/blog/post-3/">
-    Title of the post 3
-  </a>
-  <p class="ml-2 mb-1">A brief summary for the post 3</p>
-  
-  <a class="ml-1 list-entry-link text-uppercase" href="/blog/post-2/">
-    Title of the post 2
-  </a>
-  <p class="ml-2 mb-1">A brief summary for the post 2</p>
-  
-  <p class="text-right m-0">
-    <a href="/archive/">See All</a>
-  </p>
-</div>
 
-    </div>
-  </div>
-</div>
 
-      </main>
-    </div>
-    <footer>
-  <div class="w-50 bg-danger ml-auto mr-auto mt-4" style="height: 2px;"></div>
-  <div class="mt-4 mb-2" style="font-size: 0.9em;">
-    <p class="text-center">
-      &copy; 2020 Neel Homchowdhury |
-      <a href="https://github.com/darshanbaral/mero.git">mero</a> theme by
-      <a href="https://www.darshanbaral.com">Darshan</a>
-    </p>
-  </div>
+
+
+
+<a href="https://github.com/https://github.com/masterswords98" rel="me" title="GitHub"><i class="fab fa-github fa-3x" aria-hidden="true"></i></a>
+
+
+
+
+<a href="https://linkedin.com/in/https://www.linkedin.com/in/neel-homchowdhury-42807b178/" rel="me" title="LinkedIn"><i class="fab fa-linkedin fa-3x" aria-hidden="true"></i></a>
+
+
+<a href="https://instagram.com/https://www.instagram.com/kneelb4neel/" rel="me" title="Instagram"><i class="fab fa-instagram fa-3x" aria-hidden="true"></i></a>
+
+
+
+
+<a href="mailto:neelhom@gmail.com" title="Email"><i class="fas fa-envelope fa-3x" aria-hidden="true"></i></a>
+
+
+
+
+
+
+
+
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4 user-description text-center">
+						<p>Hi I&#39;m Neel and this is my website. I am a developer, writer and family man. I like developing websites using Hugo, sports, nature, photography and travel. On this websites you can expect my projects and blog posts about everything I love. Enjoy!</p>
+					</div>
+				</div>
+				
+			</div>
+			<footer class="footer text-center">
+<p>Copyright &copy; 2020 Neel Homchowdhury -
+<span class="credit">
+	Powered by
+	<a target="_blank" href="https://gohugo.io">Hugo</a>
+	and
+	<a target="_blank" href="https://github.com/LordMathis/hugo-theme-nix/">Nix</a> theme.
+</span>
+</p>
 </footer>
 
-  </body>
+		</div>
+	</body>
 </html>

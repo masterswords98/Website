@@ -1,38 +1,28 @@
-baseURL = "/"
+baseurl = "http://example.org/"
+title = "Hugo Website"
+theme = "hugo-theme-nix"
 languageCode = "en-us"
-title = "My Blog"
-theme = "mero"
-disableKinds = ["taxonomyTerm"]
+disqusShortname = "your_disqus_shortname"
+
+[menu]
+  [[menu.header]]
+    name = "posts"
+    weight = 0
+    url = "post"
+  [[menu.header]]
+    name = "about"
+    weight = 1
+    url = "about"
 
 [params]
-  dateFormat = "2006-01-02" 
-  author = "Neel Homchowdhury"
-  description = "Data Scientist/Data Analytics"
-  mainImage = "images/main2.jpeg"
+  GithubID = "https://github.com/masterswords98"
+  LinkedInID = "https://www.linkedin.com/in/neel-homchowdhury-42807b178/"
+  InstagramID = "https://www.instagram.com/kneelb4neel/"
+  Name = "Neel Homchowdhury"
+  HeaderUsername = "neel"
+  HeaderHostname = "gohugo.io"
+  Email = "neelhom@gmail.com"
+  About = "Hi I'm Neel and this is my website. I am a developer, writer and family man. I like developing websites using Hugo, sports, nature, photography and travel. On this websites you can expect my projects and blog posts about everything I love. Enjoy!"
+  ProfilePicture = "https://scontent-dfw5-1.xx.fbcdn.net/v/t1.0-9/52797043_1150725361767990_1631090379858116608_o.jpg?_nc_cat=110&_nc_sid=7aed08&_nc_ohc=Iw76XWPMyvUAX8Z0anu&_nc_ht=scontent-dfw5-1.xx&oh=074c54344193b2ab8900b9b7ec11aeeb&oe=5F2055FB"
+  Favicon = "/favicon.ico"
 
-[params.introduction]
-   text = "**This website** is a collection of my thoughts, more information about me, and the projects I've both been apart of in the past, and am currently working on now! Please feel free to take a look around, and get in touch with me if you'd like to talk!"
-
-[params.social]
-  [[params.social.list]]
-  class = "fab"
-  icon = "fa-linkedin-in"
-  url = "https://www.linkedin.com/in/neel-homchowdhury-42807b178/"
-
-  [[params.social.list]]
-  class = "fab"
-  icon = "fa-github"
-  url = "#"
-
-  [[params.social.list]]
-  class = "fab"
-  icon = "fa-instagram"
-  url = "https://www.instagram.com/kneelb4neel/"  
-
-  [[params.social.list]]
-  class = "far"
-  icon = "fa-envelope"
-  url = "mailto:neelhom@gmail.com?"  
-
-[params.footer]
-  message = "&copy; 2020 Neel Homchowdhury"
