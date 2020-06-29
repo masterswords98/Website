@@ -22,7 +22,7 @@ disqusShortname = "your_disqus_shortname"
   HeaderUsername = "neel"
   HeaderHostname = "gohugo.io"
   Email = "neelhom@gmail.com"
-  About = "Hi I'm Neel and this is my website. I am a developer, writer and family man. I like developing websites using Hugo, sports, nature, photography and travel. On this websites you can expect my projects and blog posts about everything I love. Enjoy!"
+  About = "Hi I'm Neel! I am a developer, writer and family man. I like developing websites using Hugo, sports, nature, photography and travel. On this websites you can expect my projects and blog posts about everything I love. Enjoy!"
   ProfilePicture = "https://scontent-dfw5-1.xx.fbcdn.net/v/t1.0-9/52797043_1150725361767990_1631090379858116608_o.jpg?_nc_cat=110&_nc_sid=7aed08&_nc_ohc=Iw76XWPMyvUAX8Z0anu&_nc_ht=scontent-dfw5-1.xx&oh=074c54344193b2ab8900b9b7ec11aeeb&oe=5F2055FB"
   Favicon = "/favicon.ico"
 
