@@ -17,7 +17,7 @@
       <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/creating-a-new-theme/</guid>
-      <description>Introduction ## this is a comment $ echo this is a command this is a command ## edit the file $vi foo.md +++ date = &amp;quot;2014-09-28&amp;quot; title = &amp;quot;creating a new theme&amp;quot; +++ bah and humbug :wq ## show it $ cat foo.md +++ date = &amp;quot;2014-09-28&amp;quot; title = &amp;quot;creating a new theme&amp;quot; +++ bah and humbug $ Some Definitions There are a few concepts that you need to understand before creating a theme.</description>
+      <description>Introduction Current approaches to marketing musicians have changed following the dramatic rise and dominance of online streaming and the prevalence of social media outlets in creating distinct brands. Direct marketing on social media and a comprehensive online presence has become critical to the success of these artists. However, for up and coming artists, breaking finding widespread success has become increasingly difficult due to the sheer volume of new artists that are discoverable on these platforms.</description>
     </item>
     
   </channel>
