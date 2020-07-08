@@ -15,9 +15,9 @@ disqusShortname = "your_disqus_shortname"
     url = "about"
 
 [params]
-  GithubID = "https://github.com/masterswords98"
-  LinkedInID = "https://www.linkedin.com/in/neel-homchowdhury-42807b178/"
-  InstagramID = "https://www.instagram.com/kneelb4neel/"
+  GithubID = "masterswords98"
+  LinkedInID = "neel-homchowdhury-42807b178/"
+  InstagramID = "kneelb4neel"
   Name = "Neel Homchowdhury"
   HeaderUsername = "neel"
   HeaderHostname = "gohugo.io"
