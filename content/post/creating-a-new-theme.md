@@ -57,10 +57,9 @@ def get_the_friendships(ids):
 These 2 functions allowed me to get not only the information about who each artist's followers were, but also who the followers were additionally following. Some cleaning was required beforehand in order to extrapolate correlations about the locations of these users, their relative age, etc. 
 
 
-{{< figure src="https://lh3.googleusercontent.com/UPApTDGjmJz2jWSRnJXLtkOiL_t_n1G80K8dNSMtd5NifM2N7SRvKnFU_9S5jHDyUQh_mRQBvqAXAzTAvTjL1KbvW-wVHU7ftN58xBlIqW3fJsz1SjaGgzRduUn_TioSe2pvlPBFkdcLVNVrY6qgEwKSiUsRxEbCzhHBAFikVv1v12qeudC64gAb-FikELzGRiMRYWvqYiFccbxlfIsNqwggPQ7-Fwt34Fguc3fx6_5vhmED-Diq_IDqWjMJEtNCNDOcWW9R4WNgZDukUkppGCXm4LTdJ3AmP7Jq2D0_eeUJrmP2zH8ZPoqJHARyfRFti7fgP-EQ9DQytVtWCSkePNe_Z1KMEXjmPrKEZ19jPmget85GCw59Nq1N5AODJ5arBBSVFgHElb01yMmF88UKmRPzg4GQ9GZAbmiziykhZrO_1PUOisZr7gc6EZgnKo909QnlgC7BEiN_PQKwyN5V9b0jbAANnsJHWK_kF97H63M1mzT1yF1fETD3zJ0lHglkOviN_E4LjUCRTrDCinwwG3lWcj7DrbMF6s-Z3oSGJt9RL1H22DjOVvayfVXpqAvGSyhzV3gEbd5jzx_qJjh76N4v-HP_i9uxtP0e9HE8zVeFiCrtpsGeaejVIChjw3ngddimXV0Iucov2OpPa_xHI2R4mV7PvIcrelIC4fPnBjfhwOE1xHUcWnvuhecprw=w974-h495-no?authuser=0" title="Cleaned Follower Data" >}} 
+![yeekfollowerscleaned](https://lh3.googleusercontent.com/kUL8GRklOVvkd4-3NHg5rOU5Ie8g01P1aZw-ozidWv_T6wQ8_0bYwet1NZWgxSxFqFROHGdfTWi_Lxy9QNQ4Q38HSgl6uC2K5OdqVzuJUV8janfMhX81leV3BFQr-CPKrj7W3093aQ=w2400)
 
-
-
+#### Cleaned Follower Data
 
 After having done this for all 4 artists I began to run a series of mathematical and statistical tests in order to determine whether or not there were actual commonalities between all 4 artists followers.
 
@@ -71,14 +70,18 @@ I began by running multinomial regression models on each of the 4 artists follow
 
 Given the fact that these 4 artists all had multiple collaborations with each other, I didn't think that the results of the multionomial regression model gave the full truth about the commonalities of all 4 artists' followers. In order to test this hypothesis, I ran a frequency table on this set of followers, and the results of that showed a completely different result:
 
+![followerfrequencytable](https://lh3.googleusercontent.com/e4Rq3KjcEigVW8nCxTxswL3Ogj793xIdTv7uqzVvgJwM9KOv2LkMyNwacOk-K3dgJHEbNrzmHIx9KQTm6wSokrd0lFnJL4eS2t3LQkOJG7gc744NZFEUD44PrT4TrMGbRTxZSpHeBA=w2400)
 
-{{< figure src = "https://lh3.googleusercontent.com/cAL4dGF7VuHKWZGSeK872jpdgn_lszQcNC2pNAS1x_1LNSFNniGONkYLfVdIhBP0RIVRnUdUwD-MF6Gn49qVubig0nwRypRCsJyykIHyl5vnGMHQTFdBaxmXyhySnTneReJo5PQzbOZCEgdw8LgZE0pDyGqFzcGQUMOBpjX55ju8Govi3vfp5qa4J5N5SWtNXuEYTEPFRsZSFG94tWSSEQ1qcQ0D_ZMzD7VJd4RiRQoRY-CDXNoriL1StcVBrfn-1KYiz9HipbMGPWWf8wEchsDmB3KGv39i-Y5mWEobgd0EBPOPgOxIgfTqiABupsXxWfbZEw-CjxuciCItqZye28gdQEMGqYfUMjq2XyIGslpqwZOlxFfnihowx8Y7BHm1q4mFuVG3alp0orkMWP05ipc_CZZmUOeuIcgqY_WOrecyCQJELKXeleZGMrfW6cIDgRxC2g5ifIqrMNVbRvUrmjFUUmNkLsWMLzYhLqoSO72FIG-1B5ZqBfWJrGO_QFroDLI8YmlEMq2ZOL4b7jAVXfF5jQGIAG4G7tzeZfUVSpQ7VlDtrhEuV8C4WChI9WG-RdJMfiLF5IAdIsDUXt70UDIN1ZqKKXWZ9Ks8HMVTOVCfsd9aLVbWUUJ-vXCal2X6Mc5bS-Vu5DRBJFgwN--MAzhWp5WoTnzYhl9uPp8ecgK6h26kGDeHXe5J6BSw7quix_d1clM=s974-w974-h670-no?authuser=0" title = "Follower Frequency Table" >}}
+#### Follower Frequency Table
+
 
 By viewing the data this way, it was easily able to identify that solely based on location, there definitely existed commanilities between all 4 artists' followers.
 
 This same process was repeated to see if there were commonalities in who the followers of these 4 artists were additionally following:
 
-{{< figure src = "https://lh3.googleusercontent.com/PHun_bZWYWoEX8xCfGcwsQLq5nV2jlEggGCsxWpfK2TYF4cxUI4zZWglDjIrHQ63268Ppwe0ChSCjYNmJtEQen3PErPLG_12U3C2UUjSvqDlWTuIwpzeyRDfEwMBFF0OP6w_Uyuxli5Gy9BB4q_lmjnH88IvNj91dF-LYV3ze65UkRp3s31lBU3oS0kDiwj0sQtcgSxKJo9Ry3FZU8y7WK-wCnoHqrpd0vvRNjZ3-Rk7XDTu4N1ePKT9vQ8-a2vOk-1VZnUaXbr_G01_Q1JKGw5aznlv4jzcIjMuLWps3ulk5WpTMUqiUSGoXAOn1K2CkhHV30B81kHs5yc8ZPSaLvfuJzPu0C6DlZZjhvnsECaSZE2wFLkr3Beq6zCAjGyS7QZpWY4DrPfvHzo3YII9ZFSEzedK73j2fMY9XgKKJ7PRGhNgoULr1mxOSBRdayK3fzCccByyv_8crigBnoEYOF6djfUz2nCAmT5J8IQlVaw3pGV0Bv7FYneIbj7dti0403o1zD2jgCesjApEjnSAdfQMLO0kimWiBXZovK2Ksl94H49voV1C3ocfQLPTEWwSq-h8hTfZCc12f3daz57WJrP7g380AL9gpnzkZ558NgoxFyO_bx9kNXL4OrbCbmjAaT5cEKpW4zhhnNkSXRKOrlUjuiLOLkNddTPdudvDe-nh845-35V0KRVOPZYG3Q=w385-h656-no?authuser=0" title = "Followed Frequency Table" >}}
+![followedfrequencytable](https://lh3.googleusercontent.com/e4Rq3KjcEigVW8nCxTxswL3Ogj793xIdTv7uqzVvgJwM9KOv2LkMyNwacOk-K3dgJHEbNrzmHIx9KQTm6wSokrd0lFnJL4eS2t3LQkOJG7gc744NZFEUD44PrT4TrMGbRTxZSpHeBA=w2400)
+
+#### Followed Frequency Table
 
 Again, the frequency table showed that there were a large number of these 4 artists' followers who were similarily following other twitter accounts.
 
