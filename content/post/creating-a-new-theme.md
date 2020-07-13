@@ -79,7 +79,7 @@ By viewing the data this way, it was easily able to identify that solely based o
 
 This same process was repeated to see if there were commonalities in who the followers of these 4 artists were additionally following:
 
-![followedfrequencytable](https://lh3.googleusercontent.com/e4Rq3KjcEigVW8nCxTxswL3Ogj793xIdTv7uqzVvgJwM9KOv2LkMyNwacOk-K3dgJHEbNrzmHIx9KQTm6wSokrd0lFnJL4eS2t3LQkOJG7gc744NZFEUD44PrT4TrMGbRTxZSpHeBA=w2400)
+![followedfrequencytable](https://lh3.googleusercontent.com/Q_quq2zyO7YuAYz1Uii8mL7vbsEpOwRP616Goz5wgmehahk5ulubMUbLvRiYVdUym985V5eugg_FpNDbMp9lxgxgW6AEhNe91v5iLIvK8ZYGFcbw6YrBgb9Kc968ClFd3at0L_uzkg=w2400)
 
 #### Followed Frequency Table
 
